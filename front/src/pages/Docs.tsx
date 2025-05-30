@@ -1,5 +1,5 @@
 import DocsNav from "@/components/DocsNav";
-import { Outlet, useLocation } from "react-router";
+import { Outlet } from "react-router";
 import { PageBackground } from "@/components/PageBackground";
 
 export default function Docs() {
