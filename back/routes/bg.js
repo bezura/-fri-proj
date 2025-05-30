@@ -5,7 +5,7 @@ const bgStore = {};
 
 module.exports = async function (fastify) {
   // Генерация и сохранение фона
-  fastify.post("/api/generate-bg", async (req, reply) => {
+  fastify.post("/generate-bg", async (req, reply) => {
     const { prompt, page } = req.body;
     if (!prompt || !page) {
       return reply.code(400).send({ error: "prompt и page обязательны" });
@@ -35,7 +35,7 @@ module.exports = async function (fastify) {
   });
 
   // Получение текущего фона для страницы
-  fastify.get("/api/bg/:page", async (req, reply) => {
+  fastify.get("/bg/:page", async (req, reply) => {
     const { page } = req.params;
     if (bgStore[page]) {
       return { image: bgStore[page] };
