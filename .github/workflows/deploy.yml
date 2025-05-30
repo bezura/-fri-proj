@@ -27,6 +27,5 @@ jobs:
             docker compose build
             echo "→ Перезапуск контейнеров"
             docker compose up -d
-            echo "✅ Деплой завершён"
-  EOF
-
+            echo "✅ Деплой завершён" 
+          EOF
