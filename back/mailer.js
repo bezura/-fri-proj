@@ -35,5 +35,21 @@ export function createMailer(config) {
     });
   }
 
-  return { sendVerificationEmail };
+  async function sendResetPasswordEmail(email, token) {
+    const link = `${config.FRONTEND_URL}/reset-password?token=${token}&email=${encodeURIComponent(email)}`;
+    await client.sendAsync({
+      text: `Click this link to reset your password: ${link}`,
+      from: config.SMTP_USER,
+      to: email,
+      subject: 'Reset your password',
+      attachment: [
+        {
+          data: `<p>Click <a href="${link}">here</a> to reset your password.</p>`,
+          alternative: true
+        }
+      ]
+    });
+  }
+
+  return { sendVerificationEmail, sendResetPasswordEmail };
 }

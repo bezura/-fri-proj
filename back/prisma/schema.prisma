@@ -13,5 +13,6 @@ model User {
   password  String
   verified  Boolean @default(false)
   token     String
+  resetToken String?
   createdAt DateTime @default(now())
 }
