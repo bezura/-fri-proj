@@ -16,7 +16,7 @@ jobs:
       - name: SSH and deploy via sshpass
         run: |
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} -p ${{ secrets.SSH_PORT }} << 'EOF'
-            cd /path/to/project
+            cd /home/minecraft-server/SERVER/fri-proj
             git pull origin main
             docker compose build
             docker compose up -d
