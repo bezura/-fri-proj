@@ -49,7 +49,7 @@ const fourPData: TableRowData[] = [
 
 const FourPTable = () => {
   return (
-    <section className="mb-20 px-4 max-w-4xl mx-auto">
+    <section className="mb-20 px-4 max-w-4xl mx-auto relative z-1">
       <div className="relative mb-10">
         <motion.div
           initial={{ width: 0 }}
@@ -85,7 +85,7 @@ const FourPTable = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.8 }}
-        className="mt-6 flex flex-wrap gap-4 justify-center text-sm"
+        className="mt-6 flex flex-wrap gap-4 justify-center text-sm bg-white/80 backdrop-blur rounded-xl shadow p-6"
       >
         <div className="flex items-center gap-2">
           <Package className="h-4 w-4 text-teal-600" />

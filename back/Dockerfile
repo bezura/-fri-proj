@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN pnpm install
+RUN pnpm install --force
 RUN pnpm dlx prisma generate
 
 EXPOSE 3000

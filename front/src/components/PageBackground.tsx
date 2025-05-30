@@ -8,7 +8,7 @@ export function PageBackground({ pageId }: { pageId: string }) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch(`/api/bg/${pageId}`)
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/bg/${pageId}`)
       .then(res => res.ok ? res.json() : Promise.reject())
       .then(data => setBg(data.image))
       .catch(() => setBg(null));
@@ -18,13 +18,13 @@ export function PageBackground({ pageId }: { pageId: string }) {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/generate-bg", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/generate-bg`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt, page: pageId }),
       });
-      if (!res.ok) throw new Error("Ошибка генерации");
       const data = await res.json();
+      if (!res.ok) throw new Error(`Ошибка генерации: ${data.error}`);
       setBg(data.image);
       setShowPrompt(false);
       setPrompt("");
@@ -42,9 +42,9 @@ export function PageBackground({ pageId }: { pageId: string }) {
           style={{
             position: "fixed",
             inset: 0,
-            zIndex: -1,
+            zIndex: 0,
             background: `url(data:image/jpeg;base64,${bg}) center/cover no-repeat`,
-            filter: "blur(18px) brightness(0.7)",
+            filter: "blur(12px) brightness(0.7)",
             transition: "background 0.5s"
           }}
         />
@@ -85,7 +85,7 @@ export function PageBackground({ pageId }: { pageId: string }) {
               <button onClick={handleGenerate} disabled={loading || !prompt} style={{ padding: "8px 16px", borderRadius: 6, background: "#14b8a6", color: "#fff", border: "none", fontWeight: 500 }}>
                 {loading ? "Генерируется..." : "Сгенерировать"}
               </button>
-              <button onClick={() => setShowPrompt(false)} style={{ padding: "8px 16px", borderRadius: 6, background: "#eee", border: "none" }}>Отмена</button>
+              <button disabled={loading} onClick={() => setShowPrompt(false)} style={{ padding: "8px 16px", borderRadius: 6, background: "#eee", border: "none" }}>Отмена</button>
             </div>
             {error && <div style={{ color: "red", marginTop: 8 }}>{error}</div>}
           </div>

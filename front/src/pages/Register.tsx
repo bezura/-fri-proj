@@ -19,7 +19,7 @@ export default function Register() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (localStorage.getItem("registered")) {
+    if (localStorage.getItem("registered") === "true") {
       navigate("/docs/intro", { replace: true });
     }
   }, [navigate]);
@@ -58,7 +58,7 @@ export default function Register() {
     <>
       <PageBackground pageId="register" />
       <div className="flex justify-center items-center p-4 h-dvh">
-        <Card className="w-full max-w-md">
+        <Card className="w-full max-w-md bg-white/80 backdrop-blur shadow-lg rounded-xl">
           <CardHeader>
             <CardTitle className="text-2xl font-bold">Регистрация</CardTitle>
             <CardDescription>Создайте новый аккаунт, чтобы начать пользоваться сервисом</CardDescription>

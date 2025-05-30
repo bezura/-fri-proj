@@ -14,7 +14,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem("registered")) {
+    if (localStorage.getItem("registered") === "true") {
       navigate("/docs/intro", { replace: true });
     }
   }, [navigate]);
@@ -24,7 +24,7 @@ export default function Login() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/login", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -46,7 +46,7 @@ export default function Login() {
     <>
       <PageBackground pageId="login" />
       <div className="flex justify-center items-center h-dvh p-4">
-        <Card className="w-full max-w-md">
+        <Card className="w-full max-w-md bg-white/80 backdrop-blur shadow-lg rounded-xl">
           <CardHeader>
             <CardTitle className="text-2xl font-bold text-center">Вход</CardTitle>
           </CardHeader>

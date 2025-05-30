@@ -5,7 +5,7 @@ COPY front .
 RUN corepack enable && corepack prepare pnpm@latest --activate
 ARG VITE_BACKEND_URL
 ENV VITE_BACKEND_URL=$VITE_BACKEND_URL
-RUN pnpm install
+RUN pnpm install  --force
 RUN pnpm run build
 
 FROM nginx:alpine

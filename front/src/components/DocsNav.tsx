@@ -9,6 +9,7 @@ const sections = [
   { id: "swot", label: "SWOT-анализ" },
   { id: "fourp", label: "4P-анализ" },
   { id: "diagrams", label: "Диаграммы" },
+  { id: "analytics", label: "Аналитика" },
 ];
 
 export default function DocsNav() {

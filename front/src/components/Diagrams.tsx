@@ -18,7 +18,7 @@ import {
 
 const Diagrams = () => {
   return (
-    <section className="mb-20 px-4 max-w-5xl mx-auto">
+    <section className="mb-20 px-4 max-w-5xl mx-auto relative z-1">
       <div className="relative mb-10">
         <motion.div
           initial={{ width: 0 }}

@@ -11,6 +11,7 @@ import Timeline from './components/Timeline';
 import SwotTable from './components/SwotTable';
 import FourPTable from './components/FourPTable';
 import Diagrams from './components/Diagrams';
+import AnalyticsPage from './pages/AnalyticsPage';
 
 export default function Router() {
   return (
@@ -27,6 +28,7 @@ export default function Router() {
         <Route path="swot" element={<SwotTable />} />
         <Route path="fourp" element={<FourPTable />} />
         <Route path="diagrams" element={<Diagrams />} />
+        <Route path="analytics" element={<AnalyticsPage />} />
       </Route>
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />

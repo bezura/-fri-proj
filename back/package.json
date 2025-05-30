@@ -14,9 +14,11 @@
     "@fastify/env": "^5.0.2",
     "@fastify/formbody": "^8.0.2",
     "@prisma/client": "^6.8.1",
+    "axios": "^1.9.0",
     "bcrypt": "^6.0.0",
     "emailjs": "^4.0.3",
     "fastify": "^5.3.3",
+    "form-data": "^4.0.2",
     "fusionbrain-api": "^0.0.4",
     "prisma": "^6.8.1",
     "uuid": "^11.1.0"

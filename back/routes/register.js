@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import { createMailer } from '../mailer.js';
 import { prisma } from '../prisma.js';
+import { incrementRegistrations } from './analytics.js';
 
 export async function registerRoutes(fastify) {
   const mailer = createMailer(fastify.config);
@@ -36,6 +37,7 @@ export async function registerRoutes(fastify) {
         }
       });
 
+      await incrementRegistrations();
       await mailer.sendVerificationEmail(email, token);
       return reply.send({ success: true });
     }
