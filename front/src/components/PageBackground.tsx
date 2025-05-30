@@ -44,7 +44,7 @@ export function PageBackground({ pageId }: { pageId: string }) {
             inset: 0,
             zIndex: 0,
             background: `url(data:image/jpeg;base64,${bg}) center/cover no-repeat`,
-            filter: "blur(12px) brightness(0.7)",
+            filter: "blur(2px) brightness(0.7)",
             transition: "background 0.5s"
           }}
         />
