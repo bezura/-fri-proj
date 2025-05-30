@@ -8,6 +8,7 @@ import { verifyRoutes } from './routes/verify.js';
 import { loginRoutes } from './routes/login.js';
 import { forgotPasswordRoutes } from './routes/forgotPassword.js';
 import { resetPasswordRoutes } from './routes/resetPassword.js';
+import bgRoutes from './routes/bg.js';
 
 const fastify = Fastify({ logger: true });
 
@@ -20,6 +21,7 @@ await verifyRoutes(fastify);
 await loginRoutes(fastify);
 await forgotPasswordRoutes(fastify);
 await resetPasswordRoutes(fastify);
+await bgRoutes(fastify);
 
 fastify.listen({ port: Number(fastify.config.PORT), host: '0.0.0.0'  }, (err) => {
   if (err) {

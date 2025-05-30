@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { PageBackground } from "@/components/PageBackground";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -11,6 +12,12 @@ export default function Login() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("registered")) {
+      navigate("/docs/intro", { replace: true });
+    }
+  }, [navigate]);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -36,43 +43,46 @@ export default function Login() {
   }
 
   return (
-    <div className="flex justify-center items-center h-dvh p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="text-2xl font-bold text-center">Вход</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={onSubmit} className="space-y-4">
-            <Input
-              type="email"
-              required
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              placeholder="Email"
-              disabled={loading}
-            />
-            <Input
-              type="password"
-              required
-              minLength={6}
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              placeholder="Пароль"
-              disabled={loading}
-            />
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Вход..." : "Войти"}
-            </Button>
-            {error && <Alert><AlertDescription>{error}</AlertDescription></Alert>}
-            <div className="flex flex-col gap-2 mt-4 text-center">
-              <Link to="/forgot-password" className="text-teal-700 hover:underline">Забыли пароль?</Link>
-              <span className="text-gray-500 text-sm">
-                Нет аккаунта? <Link to="/register" className="text-teal-700 hover:underline">Зарегистрироваться</Link>
-              </span>
-            </div>
-          </form>
-        </CardContent>
-      </Card>
-    </div>
+    <>
+      <PageBackground pageId="login" />
+      <div className="flex justify-center items-center h-dvh p-4">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-center">Вход</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={onSubmit} className="space-y-4">
+              <Input
+                type="email"
+                required
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="Email"
+                disabled={loading}
+              />
+              <Input
+                type="password"
+                required
+                minLength={6}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                placeholder="Пароль"
+                disabled={loading}
+              />
+              <Button type="submit" className="w-full" disabled={loading}>
+                {loading ? "Вход..." : "Войти"}
+              </Button>
+              {error && <Alert><AlertDescription>{error}</AlertDescription></Alert>}
+              <div className="flex flex-col gap-2 mt-4 text-center">
+                <Link to="/forgot-password" className="text-teal-700 hover:underline">Забыли пароль?</Link>
+                <span className="text-gray-500 text-sm">
+                  Нет аккаунта? <Link to="/register" className="text-teal-700 hover:underline">Зарегистрироваться</Link>
+                </span>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    </>
   );
 } 

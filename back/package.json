@@ -17,6 +17,7 @@
     "bcrypt": "^6.0.0",
     "emailjs": "^4.0.3",
     "fastify": "^5.3.3",
+    "fusionbrain-api": "^0.0.4",
     "prisma": "^6.8.1",
     "uuid": "^11.1.0"
   }
