@@ -14,18 +14,23 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y sshpass
 
       - name: SSH and deploy with password
-        env:
-          PROJECT_DIR: "/home/minecraft-server/SERVER/fri-proj"
         run: |
-          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<EOF
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'EOF'
             set -e
-            echo "→ Переход в каталог \$PROJECT_DIR"
-            cd \$PROJECT_DIR || (echo "❌ Не найден каталог \$PROJECT_DIR" && exit 1)
+            echo "→ Переход в каталог /home/minecraft-server/SERVER/fri-proj"
+            cd /home/minecraft-server/SERVER/fri-proj || (echo "❌ Не найден каталог /home/minecraft-server/SERVER/fri-proj" && exit 1)
+          
+            echo "→ Проверка: текущее содержимое"
+            ls -la
+
             echo "→ Получение изменений из git"
             git pull origin main
+
             echo "→ Сборка Docker"
             docker compose build
+
             echo "→ Перезапуск контейнеров"
             docker compose up -d
-            echo "✅ Деплой завершён" 
+
+            echo "✅ Деплой завершён"
           EOF
