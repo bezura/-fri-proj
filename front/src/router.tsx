@@ -5,6 +5,12 @@ import Docs from './pages/Docs';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import Login from './pages/Login';
+import Header from './components/Header';
+import Description from './components/Description';
+import Timeline from './components/Timeline';
+import SwotTable from './components/SwotTable';
+import FourPTable from './components/FourPTable';
+import Diagrams from './components/Diagrams';
 
 export default function Router() {
   return (
@@ -13,7 +19,15 @@ export default function Router() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/verify" element={<Verify />} />
-      <Route path="/docs" element={<Docs />} />
+      <Route path="/docs" element={<Docs />}>
+        <Route index element={<Navigate to="intro" replace />} />
+        <Route path="intro" element={<Header />} />
+        <Route path="description" element={<Description />} />
+        <Route path="timeline" element={<Timeline />} />
+        <Route path="swot" element={<SwotTable />} />
+        <Route path="fourp" element={<FourPTable />} />
+        <Route path="diagrams" element={<Diagrams />} />
+      </Route>
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="*" element={<h1>404 Not Found</h1>} />
