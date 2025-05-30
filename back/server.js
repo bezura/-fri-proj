@@ -15,7 +15,7 @@ await fastify.register(formbody);
 await registerRoutes(fastify);
 await verifyRoutes(fastify);
 
-fastify.listen({ port: Number(fastify.config.PORT) }, (err) => {
+fastify.listen({ port: Number(fastify.config.PORT), host: '0.0.0.0'  }, (err) => {
   if (err) {
     fastify.log.error(err);
     process.exit(1);

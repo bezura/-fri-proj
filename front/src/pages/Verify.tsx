@@ -23,8 +23,9 @@ export default function Verify() {
       }
 
       try {
+        console.log("🔍 Register request to:", `${import.meta.env.VITE_BACKEND_URL}/verify`)
         const res = await fetch(
-          `http://localhost:3000/verify?token=${token}&email=${encodeURIComponent(
+          `${import.meta.env.VITE_BACKEND_URL}/verify?token=${token}&email=${encodeURIComponent(
             email
           )}`
         );

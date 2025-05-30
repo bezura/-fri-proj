@@ -2,7 +2,6 @@ export const envSchema = {
   type: "object",
   required: [
     "PORT",
-    "BASE_URL",
     "FRONTEND_URL",
     "SMTP_HOST",
     "SMTP_PORT",
@@ -11,7 +10,6 @@ export const envSchema = {
   ],
   properties: {
     PORT: { type: "string", default: "3000" },
-    BASE_URL: { type: "string" },
     FRONTEND_URL: { type: "string" },
     SMTP_HOST: { type: "string" },
     SMTP_PORT: { type: "string" },
