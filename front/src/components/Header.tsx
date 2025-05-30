@@ -3,7 +3,7 @@ import { Users, Calendar, MapPin } from "lucide-react";
 
 const Header = () => {
   return (
-    <header className="relative py-10 px-4 mb-12 overflow-hidden bg-gradient-to-r from-white to-teal-50">
+    <header className="relative py-10 px-4 mb-12 overflow-hidden bg-gradient-to-r from-white to-teal-50  bg-white/80 backdrop-blur rounded-xl shadow p-6">
       <div className="absolute top-0 right-0 w-64 h-64 bg-teal-100 rounded-full opacity-20 -translate-y-1/2 translate-x-1/2" />
       <div className="absolute bottom-0 left-0 w-40 h-40 bg-teal-200 rounded-full opacity-20 translate-y-1/2 -translate-x-1/2" />
       <div className="max-w-4xl mx-auto relative">
