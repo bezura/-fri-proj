@@ -4,11 +4,12 @@ import { useCallback } from "react";
 
 const sections = [
   { id: "intro", label: "Введение" },
-  { id: "description", label: "Описание" },
-  { id: "timeline", label: "Этапы" },
-  { id: "swot", label: "SWOT-анализ" },
-  { id: "fourp", label: "4P-анализ" },
-  { id: "diagrams", label: "Диаграммы" },
+  { id: "all", label: "О проекте" },
+  // { id: "description", label: "Описание" },
+  // { id: "timeline", label: "Этапы" },
+  // { id: "swot", label: "SWOT-анализ" },
+  // { id: "fourp", label: "4P-анализ" },
+  // { id: "diagrams", label: "Диаграммы" },
   { id: "analytics", label: "Аналитика" },
 ];
 

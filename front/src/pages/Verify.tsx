@@ -59,40 +59,40 @@ export default function Verify() {
   return (
     <>
       <PageBackground pageId="verify" />
-      <div className="flex justify-center items-center h-dvh p-4">
+    <div className="flex justify-center items-center h-dvh p-4">
         <Card className="w-full max-w-md bg-white/80 backdrop-blur shadow-lg rounded-xl">
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold text-center">
-              Подтверждение Email
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {loading && (
-              <div className="flex flex-col items-center justify-center py-6">
-                <Loader2 className="h-8 w-8 animate-spin text-gray-500 mb-2" />
-                <p className="text-gray-600">Проверка...</p>
-              </div>
-            )}
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold text-center">
+            Подтверждение Email
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {loading && (
+            <div className="flex flex-col items-center justify-center py-6">
+              <Loader2 className="h-8 w-8 animate-spin text-gray-500 mb-2" />
+              <p className="text-gray-600">Проверка...</p>
+            </div>
+          )}
 
-            {message && (
-              <Alert className="border-green-200 bg-green-50 text-green-800">
-                <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
-                <AlertDescription>
-                  {message}
-                  <Link to="/docs">Перейти к содержимому проекта</Link> 
-                </AlertDescription>
-              </Alert>
-            )}
+          {message && (
+            <Alert className="border-green-200 bg-green-50 text-green-800">
+              <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+              <AlertDescription>
+                {message}
+                <Link to="/docs">Перейти к содержимому проекта</Link> 
+              </AlertDescription>
+            </Alert>
+          )}
 
-            {error && (
-              <Alert className="border-red-200 bg-red-50 text-red-800">
-                <AlertCircle className="h-4 w-4 text-red-600 mr-2" />
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
-          </CardContent>
-        </Card>
-      </div>
+          {error && (
+            <Alert className="border-red-200 bg-red-50 text-red-800">
+              <AlertCircle className="h-4 w-4 text-red-600 mr-2" />
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
+        </CardContent>
+      </Card>
+    </div>
     </>
   );
 }

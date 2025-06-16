@@ -6,12 +6,13 @@ import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import Login from './pages/Login';
 import Header from './components/Header';
-import Description from './components/Description';
-import Timeline from './components/Timeline';
-import SwotTable from './components/SwotTable';
-import FourPTable from './components/FourPTable';
-import Diagrams from './components/Diagrams';
+// import Description from './components/Description';
+// import Timeline from './components/Timeline';
+// import SwotTable from './components/SwotTable';
+// import FourPTable from './components/FourPTable';
+// import Diagrams from './components/Diagrams';
 import AnalyticsPage from './pages/AnalyticsPage';
+import DocsAllInOne from './pages/DocsAllInOne';
 
 export default function Router() {
   return (
@@ -23,12 +24,13 @@ export default function Router() {
       <Route path="/docs" element={<Docs />}>
         <Route index element={<Navigate to="intro" replace />} />
         <Route path="intro" element={<Header />} />
-        <Route path="description" element={<Description />} />
+        {/* <Route path="description" element={<Description />} />
         <Route path="timeline" element={<Timeline />} />
         <Route path="swot" element={<SwotTable />} />
         <Route path="fourp" element={<FourPTable />} />
-        <Route path="diagrams" element={<Diagrams />} />
+        <Route path="diagrams" element={<Diagrams />} /> */}
         <Route path="analytics" element={<AnalyticsPage />} />
+        <Route path="all" element={<DocsAllInOne />} />
       </Route>
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />

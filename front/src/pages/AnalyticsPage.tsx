@@ -1,4 +1,29 @@
 import { useEffect, useState } from "react";
+import { Pie, Bar, Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  PointElement,
+  LineElement,
+  Title,
+} from "chart.js";
+
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  PointElement,
+  LineElement,
+  Title
+);
 
 function getTopKeywords(prompts: Record<string, number>, topN = 5) {
   const wordCounts: Record<string, number> = {};
@@ -32,6 +57,90 @@ export default function AnalyticsPage() {
   }, []);
 
   const topKeywords = data ? getTopKeywords(data.prompts || {}) : [];
+  const topPrompts = data ? Object.entries(data.prompts || {})
+    .sort((a, b) => (b[1] as number) - (a[1] as number))
+    .slice(0, 5) : [];
+
+  // График генераций по страницам
+  const generationsBarData = data ? {
+    labels: Object.keys(data.generations || {}),
+    datasets: [
+      {
+        label: "Генерации фона",
+        data: Object.values(data.generations || {}),
+        backgroundColor: "#00897b",
+      },
+    ],
+  } : undefined;
+  const generationsBarOptions = {
+    plugins: { legend: { display: false } },
+    scales: { y: { beginAtZero: true } },
+  };
+
+  // График топ-5 ключевых слов
+  const keywordsBarData = topKeywords.length ? {
+    labels: topKeywords.map(([w]) => w),
+    datasets: [
+      {
+        label: "Встречаемость",
+        data: topKeywords.map(([, c]) => c),
+        backgroundColor: "#ff9800",
+      },
+    ],
+  } : undefined;
+  const keywordsBarOptions = {
+    plugins: { legend: { display: false } },
+    scales: { y: { beginAtZero: true } },
+  };
+
+  // График топ-5 промтов
+  const promptsBarData = topPrompts.length ? {
+    labels: topPrompts.map(([p]) => p.length > 20 ? p.slice(0, 20) + "..." : p),
+    datasets: [
+      {
+        label: "Использования",
+        data: topPrompts.map(([, c]) => c),
+        backgroundColor: "#43a047",
+      },
+    ],
+  } : undefined;
+  const promptsBarOptions = {
+    plugins: { legend: { display: false } },
+    scales: { y: { beginAtZero: true } },
+  };
+
+  // Пример: распределение пользователей по ролям (если есть data.roles)
+  const rolesPieData = data && data.roles ? {
+    labels: Object.keys(data.roles),
+    datasets: [
+      {
+        data: Object.values(data.roles),
+        backgroundColor: ["#00897b", "#43a047", "#ffb300", "#6d4c41", "#90caf9", "#e57373"],
+      },
+    ],
+  } : undefined;
+  const rolesPieOptions = {
+    plugins: { legend: { position: "bottom" as const } },
+  };
+
+  // Пример: рост регистраций по месяцам (если есть data.registrationsByMonth)
+  const registrationsLineData = data && data.registrationsByMonth ? {
+    labels: Object.keys(data.registrationsByMonth),
+    datasets: [
+      {
+        label: "Регистрации",
+        data: Object.values(data.registrationsByMonth),
+        borderColor: "#00897b",
+        backgroundColor: "#b2dfdb",
+        tension: 0.4,
+        fill: true,
+      },
+    ],
+  } : undefined;
+  const registrationsLineOptions = {
+    plugins: { legend: { display: false } },
+    scales: { y: { beginAtZero: true } },
+  };
 
   return (
     <section className="max-w-2xl mx-auto p-6">
@@ -51,40 +160,34 @@ export default function AnalyticsPage() {
           </div>
           <div className="bg-white/80 backdrop-blur rounded-xl shadow p-6">
             <h2 className="text-xl font-semibold mb-2">Генерации фона по страницам</h2>
-            <ul className="space-y-1">
-              {Object.entries(data.generations || {}).map(([page, count]) => (
-                <li key={page} className="flex justify-between">
-                  <span className="font-medium">{page}</span>
-                  <span className="text-teal-700 font-bold">{Number(count)}</span>
-                </li>
-              ))}
-            </ul>
+            {generationsBarData && (
+              <div style={{height: 220}}><Bar data={generationsBarData} options={generationsBarOptions} /></div>
+            )}
           </div>
           <div className="bg-white/80 backdrop-blur rounded-xl shadow p-6">
             <h2 className="text-xl font-semibold mb-2">Топ-5 ключевых слов промтов</h2>
-            <ul className="space-y-1">
-              {topKeywords.map(([word, count]) => (
-                <li key={word} className="flex justify-between">
-                  <span className="font-medium">{word}</span>
-                  <span className="text-orange-600 font-bold">{Number(count)}</span>
-                </li>
-              ))}
-            </ul>
+            {keywordsBarData && (
+              <div style={{height: 220}}><Bar data={keywordsBarData} options={keywordsBarOptions} /></div>
+            )}
           </div>
           <div className="bg-white/80 backdrop-blur rounded-xl shadow p-6">
             <h2 className="text-xl font-semibold mb-2">Топ промтов</h2>
-            <ul className="space-y-1">
-              {Object.entries(data.prompts || {})
-                .sort((a, b) => (b[1] as number) - (a[1] as number))
-                .slice(0, 5)
-                .map(([prompt, count]) => (
-                  <li key={prompt} className="flex justify-between">
-                    <span className="truncate max-w-xs" title={prompt}>{prompt}</span>
-                    <span className="text-orange-600 font-bold">{Number(count)}</span>
-                  </li>
-                ))}
-            </ul>
+            {promptsBarData && (
+              <div style={{height: 220}}><Bar data={promptsBarData} options={promptsBarOptions} /></div>
+            )}
           </div>
+          {rolesPieData && (
+            <div className="bg-white/80 backdrop-blur rounded-xl shadow p-6">
+              <h2 className="text-xl font-semibold mb-2">Распределение пользователей по ролям</h2>
+              <Pie data={rolesPieData} options={rolesPieOptions} />
+            </div>
+          )}
+          {registrationsLineData && (
+            <div className="bg-white/80 backdrop-blur rounded-xl shadow p-6">
+              <h2 className="text-xl font-semibold mb-2">Рост регистраций по месяцам</h2>
+              <div style={{height: 220}}><Line data={registrationsLineData} options={registrationsLineOptions} /></div>
+            </div>
+          )}
         </div>
       )}
     </section>

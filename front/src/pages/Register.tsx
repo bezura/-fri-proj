@@ -57,63 +57,63 @@ export default function Register() {
   return (
     <>
       <PageBackground pageId="register" />
-      <div className="flex justify-center items-center p-4 h-dvh">
+    <div className="flex justify-center items-center p-4 h-dvh">
         <Card className="w-full max-w-md bg-white/80 backdrop-blur shadow-lg rounded-xl">
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold">Регистрация</CardTitle>
-            <CardDescription>Создайте новый аккаунт, чтобы начать пользоваться сервисом</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={onSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="email">Почта</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  disabled={loading}
-                  placeholder="example@mail.com"
-                  className="w-full"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password">Пароль</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  required
-                  minLength={6}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  disabled={loading}
-                  placeholder="Минимум 6 символов"
-                  className="w-full"
-                />
-              </div>
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold">Регистрация</CardTitle>
+          <CardDescription>Создайте новый аккаунт, чтобы начать пользоваться сервисом</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={onSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="email">Почта</Label>
+              <Input
+                id="email"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={loading}
+                placeholder="example@mail.com"
+                className="w-full"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="password">Пароль</Label>
+              <Input
+                id="password"
+                type="password"
+                required
+                minLength={6}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                disabled={loading}
+                placeholder="Минимум 6 символов"
+                className="w-full"
+              />
+            </div>
 
-              <Button type="submit" disabled={loading} className="w-full mt-6">
-                {loading ? "Отправка..." : "Зарегистрироваться"}
-              </Button>
-            </form>
-          </CardContent>
-          <CardFooter className="flex flex-col">
-            {message && (
-              <Alert className="mt-4 border-green-200 bg-green-50 text-green-800">
-                <CheckCircle className="h-4 w-4 text-green-600" />
-                <AlertDescription>{message}</AlertDescription>
-              </Alert>
-            )}
-            {error && (
-              <Alert className="mt-4 border-red-200 bg-red-50 text-red-800">
-                <AlertCircle className="h-4 w-4 text-red-600" />
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
-          </CardFooter>
-        </Card>
-      </div>
+            <Button type="submit" disabled={loading} className="w-full mt-6">
+              {loading ? "Отправка..." : "Зарегистрироваться"}
+            </Button>
+          </form>
+        </CardContent>
+        <CardFooter className="flex flex-col">
+          {message && (
+            <Alert className="mt-4 border-green-200 bg-green-50 text-green-800">
+              <CheckCircle className="h-4 w-4 text-green-600" />
+              <AlertDescription>{message}</AlertDescription>
+            </Alert>
+          )}
+          {error && (
+            <Alert className="mt-4 border-red-200 bg-red-50 text-red-800">
+              <AlertCircle className="h-4 w-4 text-red-600" />
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
+        </CardFooter>
+      </Card>
+    </div>
     </>
   )
 }

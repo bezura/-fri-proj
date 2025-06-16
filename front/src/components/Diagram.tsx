@@ -97,13 +97,13 @@ const Diagram = ({name, description, mermaidCode}: DiagramProps) => {
         >
           {isVisible && (
             <div
-              className="mermaid bg-white p-4 rounded-lg min-w-full h-[400px]"
+              className="mermaid bg-white p-4 rounded-lg min-w-full"
             >
               {mermaidCode}
             </div>
           )}
           {!isVisible && (
-            <div className="flex items-center justify-center h-[400px] bg-gray-50 rounded-lg">
+            <div className="flex items-center justify-center bg-gray-50 rounded-lg min-h-[120px]" style={{ minHeight: 120 }}>
               <p className="text-gray-400">Диаграмма загружается при прокрутке...</p>
             </div>
           )}

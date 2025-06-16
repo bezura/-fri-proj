@@ -677,3 +677,209 @@ DownloadReport --> Dashboard
 
 Dashboard --> Logout[Выход из системы]
 Logout --> End([Конец])`
+
+export const techArchMicroservicesDiagram = `
+flowchart LR
+  subgraph HR["HR Service"]
+    HR1["Employee Mgmt"]
+    HR2["Payroll"]
+    HR3["Performance"]
+  end
+  subgraph ML["ML Service"]
+    ML1["Prediction"]
+    ML2["Model Training"]
+    ML3["Analytics"]
+  end
+  subgraph INT["Integration Service"]
+    INT1["Banking API"]
+    INT2["GPS Tracking"]
+    INT3["CRM Sync"]
+  end
+  HR -->|"API"| GATEWAY
+  ML -->|"API"| GATEWAY
+  INT -->|"API"| GATEWAY
+  GATEWAY["API Gateway<br/>- Authentication<br/>- Rate Limiting<br/>- Load Balancing"]
+`;
+
+export const techArchSystemDiagram = `
+flowchart TB
+  LB["Load Balancer"]
+  GATEWAY["API Gateway<br/>- Authentication<br/>- Rate Limiting<br/>- Request Routing"]
+  HR["HR Service<br/>- Employees<br/>- Payroll<br/>- Reports"]
+  ML["ML Service<br/>- Models<br/>- Training<br/>- Predict"]
+  INT["Integration Service<br/>- Bank APIs<br/>- GPS Data<br/>- CRM Sync"]
+  NOTIF["Notification Service<br/>- Email/SMS<br/>- Push Notif.<br/>- System Alerts"]
+  QUEUE["Message Queue (Redis)"]
+  DBCLUSTER["Database Cluster<br/>Master DB | Replica DB"]
+
+  LB --> GATEWAY
+  GATEWAY --> HR
+  GATEWAY --> ML
+  GATEWAY --> INT
+  GATEWAY --> NOTIF
+  HR --> QUEUE
+  ML --> QUEUE
+  INT --> QUEUE
+  NOTIF --> QUEUE
+  QUEUE --> DBCLUSTER
+
+  classDef main fill:#e0f7fa,stroke:#00897b,stroke-width:2px;
+  class LB,GATEWAY,HR,ML,INT,NOTIF,QUEUE,DBCLUSTER main;
+`;
+
+// Диаграмма коммуникации (Communication Diagram)
+// Показывает обработку заявки на отпуск
+export const communicationMermaidDiagram = `
+graph TB
+    subgraph "Диаграмма коммуникации: Обработка заявки на отпуск"
+        Employee[Сотрудник]
+        HRSystem[HR Система]
+        Manager[Руководитель]
+        Database[База данных]
+        EmailService[Email Сервис]
+        
+        Employee -->|1: подать заявку| HRSystem
+        HRSystem -->|2: сохранить заявку| Database
+        HRSystem -->|3: отправить уведомление| Manager
+        EmailService -->|3.1: email уведомление| Manager
+        Manager -->|4: рассмотреть заявку| HRSystem
+        HRSystem -->|5: обновить статус| Database
+        HRSystem -->|6: уведомить сотрудника| Employee
+        EmailService -->|6.1: email результат| Employee
+        
+        style Employee fill:#e1f5fe
+        style Manager fill:#e8f5e8
+        style HRSystem fill:#fff3e0
+        style Database fill:#f3e5f5
+        style EmailService fill:#fce4ec
+    end
+`;
+
+// Диаграмма композитной структуры (Composite Structure Diagram)
+// Показывает внутреннюю структуру HR-модуля
+export const compositeStructureMermaidDiagram = `
+graph TB
+    subgraph "HR Module - Композитная структура"
+        subgraph "Employee Management Component"
+            EmpService[Employee Service]
+            EmpRepository[Employee Repository]
+            EmpValidator[Employee Validator]
+        end
+        
+        subgraph "Payroll Component"
+            PayrollService[Payroll Service]
+            SalaryCalculator[Salary Calculator]
+            PayrollRepository[Payroll Repository]
+        end
+        
+        subgraph "Leave Management Component"
+            LeaveService[Leave Service]
+            LeaveApproval[Leave Approval]
+            LeaveRepository[Leave Repository]
+        end
+        
+        subgraph "External Interfaces"
+            BankAPI[Bank API Port]
+            EmailPort[Email Port]
+            GPSPort[GPS Port]
+        end
+        
+        EmpService <--> EmpRepository
+        EmpService <--> EmpValidator
+        PayrollService <--> SalaryCalculator
+        PayrollService <--> PayrollRepository
+        PayrollService <--> BankAPI
+        LeaveService <--> LeaveApproval
+        LeaveService <--> LeaveRepository
+        LeaveService <--> EmailPort
+        EmpService <--> PayrollService
+        EmpService <--> LeaveService
+        
+        style EmpService fill:#e3f2fd
+        style PayrollService fill:#e8f5e8
+        style LeaveService fill:#fff3e0
+        style BankAPI fill:#ffebee
+        style EmailPort fill:#f1f8e9
+        style GPSPort fill:#fce4ec
+    end
+`;
+
+// Диаграмма обзора взаимодействия (Interaction Overview Diagram)
+// Показывает процесс найма сотрудника
+export const interactionOverviewMermaidDiagram = `
+flowchart TD
+    Start([Начало процесса найма]) --> CheckVacancy{Проверка вакансии}
+    
+    CheckVacancy -->|Вакансия доступна| CollectDocs[Сбор документов]
+    CheckVacancy -->|Вакансии нет| Reject[Отклонить кандидата]
+    
+    CollectDocs --> ValidateDocs{Валидация документов}
+    ValidateDocs -->|Документы корректны| Interview[Проведение интервью]
+    ValidateDocs -->|Документы некорректны| RequestFix[Запрос исправлений]
+    
+    RequestFix --> CollectDocs
+    
+    Interview --> EvaluateCandidate{Оценка кандидата}
+    EvaluateCandidate -->|Подходит| CheckReferences[Проверка рекомендаций]
+    EvaluateCandidate -->|Не подходит| Reject
+    
+    CheckReferences --> FinalDecision{Финальное решение}
+    FinalDecision -->|Принять| CreateProfile[Создание профиля сотрудника]
+    FinalDecision -->|Отклонить| Reject
+    
+    CreateProfile --> SetupAccess[Настройка доступов]
+    SetupAccess --> SendWelcome[Отправка welcome-пакета]
+    SendWelcome --> End([Завершение])
+    
+    Reject --> End
+    
+    style Start fill:#e8f5e8
+    style End fill:#ffebee
+    style CheckVacancy fill:#e3f2fd
+    style Interview fill:#fff3e0
+    style CreateProfile fill:#f3e5f5
+`;
+
+// Диаграмма объектов (Object Diagram)
+// Показывает снимок системы в момент расчета зарплаты
+export const objectMermaidDiagram = `
+graph TB
+    subgraph "Снимок системы: Расчет зарплаты за март 2025"
+        subgraph "Объекты сотрудников"
+            emp1["👤 employee1: Employee<br/>id: 101<br/>name: 'Иван Петров'<br/>position: 'Агроном'<br/>baseSalary: 80000<br/>department: 'Растениеводство'"]
+            
+            emp2["👤 employee2: Employee<br/>id: 102<br/>name: 'Мария Сидорова'<br/>position: 'HR Менеджер'<br/>baseSalary: 95000<br/>department: 'HR'"]
+        end
+        
+        subgraph "Объекты рабочего времени"
+            timesheet1["📋 timesheet1: Timesheet<br/>employeeId: 101<br/>month: 'март 2025'<br/>workedHours: 176<br/>overtimeHours: 8<br/>sickDays: 0"]
+            
+            timesheet2["📋 timesheet2: Timesheet<br/>employeeId: 102<br/>month: 'март 2025'<br/>workedHours: 168<br/>overtimeHours: 0<br/>sickDays: 2"]
+        end
+        
+        subgraph "Объекты расчета зарплаты"
+            payroll1["💰 payroll1: PayrollCalculation<br/>employeeId: 101<br/>baseSalary: 80000<br/>bonus: 15000<br/>overtime: 3000<br/>deductions: 12000<br/>netSalary: 86000"]
+            
+            payroll2["💰 payroll2: PayrollCalculation<br/>employeeId: 102<br/>baseSalary: 95000<br/>bonus: 10000<br/>overtime: 0<br/>deductions: 13500<br/>netSalary: 91500"]
+        end
+        
+        subgraph "Объект периода расчета"
+            period["📅 payrollPeriod: PayrollPeriod<br/>year: 2025<br/>month: 3<br/>startDate: '01.03.2025'<br/>endDate: '31.03.2025'<br/>status: 'В процессе'"]
+        end
+        
+        emp1 --> timesheet1
+        emp2 --> timesheet2
+        timesheet1 --> payroll1
+        timesheet2 --> payroll2
+        period --> payroll1
+        period --> payroll2
+        
+        style emp1 fill:#e3f2fd
+        style emp2 fill:#e3f2fd
+        style timesheet1 fill:#e8f5e8
+        style timesheet2 fill:#e8f5e8
+        style payroll1 fill:#fff3e0
+        style payroll2 fill:#fff3e0
+        style period fill:#f3e5f5
+    end
+`;
