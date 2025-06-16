@@ -151,133 +151,178 @@ const quantTable = (
   </table>
 );
 
+const divider = (
+  <motion.div
+    initial={{ width: 0 }}
+    animate={{ width: "100%" }}
+    transition={{ duration: 0.8, delay: 0.2 }}
+    className="h-1 bg-gradient-to-r from-teal-500 to-orange-500 rounded-full my-8"
+  />
+);
+
+const blockAnim = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.7 },
+};
+
+const accentCard = "rounded-2xl shadow-lg border border-gray-100 bg-white/90 p-6 mb-8";
+const accentListTeal = "bg-teal-50 border-l-4 border-teal-300 p-4 rounded-lg mb-2";
+const accentListOrange = "bg-orange-50 border-l-4 border-orange-300 p-4 rounded-lg mb-2";
+// const accentListBlue = "bg-blue-50 border-l-4 border-blue-300 p-4 rounded-lg mb-2";
+const accentListRed = "bg-red-50 border-l-4 border-red-300 p-4 rounded-lg mb-2";
+// const accentListPurple = "bg-purple-50 border-l-4 border-purple-300 p-4 rounded-lg mb-2";
+// const accentListYellow = "bg-yellow-50 border-l-4 border-yellow-300 p-4 rounded-lg mb-2";
+
 const SwotTable = () => {
   return (
-    <section className="mb-20 px-4 max-w-4xl mx-auto">
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className="mb-20 px-4 max-w-4xl mx-auto"
+    >
       <div className="relative mb-10">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={{ width: "100%" }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-teal-500 to-orange-500"
-        />
         <div className="flex items-center gap-3 mb-2">
-          <div className="bg-teal-100 p-2 rounded-lg">
-            <BarChart2 className="h-6 w-6 text-teal-700" />
+          <div className="bg-teal-100 p-2 rounded-lg shadow">
+            <BarChart2 className="h-7 w-7 text-teal-700" />
           </div>
           <motion.h1
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="font-sans text-3xl font-bold text-teal-700"
+            className="font-sans text-3xl md:text-4xl font-bold text-teal-800 drop-shadow-sm"
           >
             SWOT-анализ
           </motion.h1>
         </div>
+        {divider}
       </div>
-      <Table
-        headers={{
-          col1: "Фактор",
-          col2: "Описание",
-        }}
-        rows={swotData}
-      />
-
+      {/* Основная таблица SWOT */}
+      <motion.div {...blockAnim} className={accentCard}>
+        <Table
+          headers={{
+            col1: "Фактор",
+            col2: "Описание",
+          }}
+          rows={swotData}
+        />
+      </motion.div>
+      {divider}
       {/* Подробные угрозы */}
-      <div className="mt-8 mb-10">
+      <motion.div {...blockAnim} className={accentCard}>
         <div className="flex items-center gap-2 mb-2">
           <Shield className="h-5 w-5 text-red-600" />
           <h2 className="text-lg font-semibold text-red-700">Детализированные угрозы</h2>
         </div>
         <div className="mb-2 font-semibold text-red-700">Законодательные риски:</div>
-        <ul className="list-disc pl-6 mb-4 text-gray-700">
-          <li>Ужесточение требований ФЗ-152 к обработке персональных данных сельхозработников</li>
-          <li>Изменения в трудовом законодательстве, касающиеся сезонных работников</li>
-          <li>Новые требования к отчетности в Росстат и налоговые органы</li>
-          <li>Возможные ограничения на использование ML-алгоритмов в кадровых решениях</li>
-        </ul>
+        <div className={accentListRed}>
+          <ul className="list-disc pl-6 mb-2 text-gray-800">
+            <li>Ужесточение требований ФЗ-152 к обработке персональных данных сельхозработников</li>
+            <li>Изменения в трудовом законодательстве, касающиеся сезонных работников</li>
+            <li>Новые требования к отчетности в Росстат и налоговые органы</li>
+            <li>Возможные ограничения на использование ML-алгоритмов в кадровых решениях</li>
+          </ul>
+        </div>
         <div className="mb-2 font-semibold text-red-700">Технические риски ML-модели:</div>
-        <ul className="list-disc pl-6 mb-4 text-gray-700">
-          <li>Деградация точности предсказаний из-за изменения климатических условий</li>
-          <li>Переобучение модели на исторических данных, не учитывающих новые факторы</li>
-          <li>Необходимость постоянной ретренировки модели при изменении сортов культур</li>
-          <li>Риск кибератак на ML-модель и возможность искажения результатов</li>
-        </ul>
+        <div className={accentListRed}>
+          <ul className="list-disc pl-6 mb-2 text-gray-800">
+            <li>Деградация точности предсказаний из-за изменения климатических условий</li>
+            <li>Переобучение модели на исторических данных, не учитывающих новые факторы</li>
+            <li>Необходимость постоянной ретренировки модели при изменении сортов культур</li>
+            <li>Риск кибератак на ML-модель и возможность искажения результатов</li>
+          </ul>
+        </div>
         <div className="mb-2 font-semibold text-red-700">Экономические факторы в агросекторе:</div>
-        <ul className="list-disc pl-6 text-gray-700">
-          <li>Волатильность цен на сельхозпродукцию, влияющая на бюджет ИТ-проектов</li>
-          <li>Зависимость от государственных субсидий и их возможное сокращение</li>
-          <li>Сезонность доходов агропредприятий, осложняющая планирование затрат на ИТ</li>
-          <li>Рост стоимости энергоресурсов, влияющий на операционные расходы</li>
-        </ul>
-      </div>
-
+        <div className={accentListRed}>
+          <ul className="list-disc pl-6 text-gray-800">
+            <li>Волатильность цен на сельхозпродукцию, влияющая на бюджет ИТ-проектов</li>
+            <li>Зависимость от государственных субсидий и их возможное сокращение</li>
+            <li>Сезонность доходов агропредприятий, осложняющая планирование затрат на ИТ</li>
+            <li>Рост стоимости энергоресурсов, влияющий на операционные расходы</li>
+          </ul>
+        </div>
+      </motion.div>
+      {divider}
       {/* Конкурентный анализ */}
-      <div className="mt-16 mb-10">
+      <motion.div {...blockAnim} className={accentCard}>
         <div className="flex items-center gap-2 mb-4">
           <TableIcon className="h-5 w-5 text-blue-600" />
           <h2 className="text-xl font-semibold text-blue-700">Конкурентный анализ HCM-систем</h2>
         </div>
         <div className="overflow-x-auto">{competitorTable}</div>
         <div className="mb-2 mt-4 font-semibold text-teal-700">Конкурентные преимущества SUpperHCM:</div>
-        <ul className="list-disc pl-6 mb-4 text-gray-700">
-          <li>Единственное решение, специально разработанное для агросектора</li>
-          <li>Уникальная интеграция HR-процессов с агрономическими данными</li>
-          <li>Значительно более низкая стоимость по сравнению с западными аналогами</li>
-          <li>Полная совместимость с российским законодательством с момента запуска</li>
-        </ul>
+        <div className={accentListTeal}>
+          <ul className="list-disc pl-6 mb-2 text-gray-800">
+            <li>Единственное решение, специально разработанное для агросектора</li>
+            <li>Уникальная интеграция HR-процессов с агрономическими данными</li>
+            <li>Значительно более низкая стоимость по сравнению с западными аналогами</li>
+            <li>Полная совместимость с российским законодательством с момента запуска</li>
+          </ul>
+        </div>
         <div className="mb-2 font-semibold text-orange-700">Конкурентные недостатки:</div>
-        <ul className="list-disc pl-6 text-gray-700">
-          <li>Отсутствие репутации на рынке (новый продукт)</li>
-          <li>Меньший функционал в стандартных HR-процессах по сравнению с mature-решениями</li>
-          <li>Отсутствие глобальной поддержки и партнерской сети</li>
-        </ul>
-      </div>
-
+        <div className={accentListOrange}>
+          <ul className="list-disc pl-6 text-gray-800">
+            <li>Отсутствие репутации на рынке (новый продукт)</li>
+            <li>Меньший функционал в стандартных HR-процессах по сравнению с mature-решениями</li>
+            <li>Отсутствие глобальной поддержки и партнерской сети</li>
+          </ul>
+        </div>
+      </motion.div>
+      {divider}
       {/* Стратегические рекомендации */}
-      <div className="mt-16 mb-10">
+      <motion.div {...blockAnim} className={accentCard}>
         <div className="flex items-center gap-2 mb-4">
           <Lightbulb className="h-5 w-5 text-yellow-500" />
           <h2 className="text-xl font-semibold text-yellow-700">Стратегические рекомендации на основе SWOT-анализа</h2>
         </div>
         <div className="mb-2 font-semibold text-teal-700">Стратегии SO (Сильные стороны + Возможности):</div>
-        <ul className="list-disc pl-6 mb-4 text-gray-700">
-          <li><b>Развитие экосистемы AgriTech:</b> Использовать уникальную позицию для создания комплексной платформы управления агропредприятием</li>
-          <li><b>Экспансия на рынки СНГ:</b> Адаптировать решение для Казахстана, Беларуси, Узбекистана с учетом местной специфики</li>
-          <li><b>Партнерство с производителями сельхозтехники:</b> Интегрироваться с John Deere, CLAAS для получения данных с техники</li>
-          <li><b>Привлечение государственного финансирования:</b> Участвовать в программах цифровизации АПК</li>
-        </ul>
+        <div className={accentListTeal}>
+          <ul className="list-disc pl-6 mb-2 text-gray-800">
+            <li><b>Развитие экосистемы AgriTech:</b> Использовать уникальную позицию для создания комплексной платформы управления агропредприятием</li>
+            <li><b>Экспансия на рынки СНГ:</b> Адаптировать решение для Казахстана, Беларуси, Узбекистана с учетом местной специфики</li>
+            <li><b>Партнерство с производителями сельхозтехники:</b> Интегрироваться с John Deere, CLAAS для получения данных с техники</li>
+            <li><b>Привлечение государственного финансирования:</b> Участвовать в программах цифровизации АПК</li>
+          </ul>
+        </div>
         <div className="mb-2 font-semibold text-orange-700">Стратегии WO (Слабые стороны + Возможности):</div>
-        <ul className="list-disc pl-6 mb-4 text-gray-700">
-          <li><b>Создание центра компетенций:</b> Привлечь экспертов-агрономов для улучшения качества ML-алгоритмов</li>
-          <li><b>Развитие партнерской сети:</b> Создать сеть внедренческих партнеров для масштабирования</li>
-          <li><b>Стандартизация агро-HR процессов:</b> Разработать отраслевые стандарты для HR в агросекторе</li>
-          <li><b>Создание обучающих программ:</b> Подготовка специалистов по цифровизации в АПК</li>
-        </ul>
+        <div className={accentListOrange}>
+          <ul className="list-disc pl-6 mb-2 text-gray-800">
+            <li><b>Создание центра компетенций:</b> Привлечь экспертов-агрономов для улучшения качества ML-алгоритмов</li>
+            <li><b>Развитие партнерской сети:</b> Создать сеть внедренческих партнеров для масштабирования</li>
+            <li><b>Стандартизация агро-HR процессов:</b> Разработать отраслевые стандарты для HR в агросекторе</li>
+            <li><b>Создание обучающих программ:</b> Подготовка специалистов по цифровизации в АПК</li>
+          </ul>
+        </div>
         <div className="mb-2 font-semibold text-green-700">Стратегии ST (Сильные стороны + Угрозы):</div>
-        <ul className="list-disc pl-6 mb-4 text-gray-700">
-          <li><b>Диверсификация рисков:</b> Развивать решения для смежных отраслей (лесное хозяйство, рыбоводство)</li>
-          <li><b>Создание резервных ML-моделей:</b> Разработать несколько алгоритмов для повышения надежности</li>
-          <li><b>Юридическая защита:</b> Получить патенты на ключевые алгоритмы и технологические решения</li>
-          <li><b>Создание антикризисного фонда:</b> Резервировать средства для поддержки клиентов в сложные периоды</li>
-        </ul>
+        <div className={accentListTeal}>
+          <ul className="list-disc pl-6 mb-2 text-gray-800">
+            <li><b>Диверсификация рисков:</b> Развивать решения для смежных отраслей (лесное хозяйство, рыбоводство)</li>
+            <li><b>Создание резервных ML-моделей:</b> Разработать несколько алгоритмов для повышения надежности</li>
+            <li><b>Юридическая защита:</b> Получить патенты на ключевые алгоритмы и технологические решения</li>
+            <li><b>Создание антикризисного фонда:</b> Резервировать средства для поддержки клиентов в сложные периоды</li>
+          </ul>
+        </div>
         <div className="mb-2 font-semibold text-red-700">Стратегии WT (Слабые стороны + Угрозы):</div>
-        <ul className="list-disc pl-6 mb-4 text-gray-700">
-          <li><b>Минимизация зависимостей:</b> Создать план перехода на отечественные технологии при необходимости</li>
-          <li><b>Страхование рисков:</b> Застраховать ключевые технологические и финансовые риски</li>
-          <li><b>Создание альянсов:</b> Объединиться с другими российскими AgriTech компаниями для усиления позиций</li>
-          <li><b>Разработка Lite-версии:</b> Создать упрощенную версию для малых агропредприятий с ограниченным бюджетом</li>
-        </ul>
+        <div className={accentListRed}>
+          <ul className="list-disc pl-6 mb-2 text-gray-800">
+            <li><b>Минимизация зависимостей:</b> Создать план перехода на отечественные технологии при необходимости</li>
+            <li><b>Страхование рисков:</b> Застраховать ключевые технологические и финансовые риски</li>
+            <li><b>Создание альянсов:</b> Объединиться с другими российскими AgriTech компаниями для усиления позиций</li>
+            <li><b>Разработка Lite-версии:</b> Создать упрощенную версию для малых агропредприятий с ограниченным бюджетом</li>
+          </ul>
+        </div>
         <div className="mb-2 font-semibold text-teal-700">Приоритетные направления развития:</div>
-        <ol className="list-decimal pl-6 text-gray-700">
+        <ol className="list-decimal pl-6 text-gray-800">
           <li><b>Краткосрочные (0-1 год):</b> Завершение разработки MVP, привлечение первых клиентов, получение обратной связи</li>
           <li><b>Среднесрочные (1-3 года):</b> Масштабирование на российском рынке, развитие ML-компонента, создание мобильного приложения</li>
           <li><b>Долгосрочные (3-5 лет):</b> Экспансия в страны СНГ, создание экосистемы AgriTech, выход на IPO или поиск стратегического инвестора</li>
         </ol>
-      </div>
-
+      </motion.div>
+      {divider}
       {/* Количественная оценка факторов */}
-      <div className="mt-16 mb-10">
+      <motion.div {...blockAnim} className={accentCard}>
         <div className="flex items-center gap-2 mb-4">
           <Award className="h-5 w-5 text-purple-600" />
           <h2 className="text-xl font-semibold text-purple-700">Количественная оценка SWOT-факторов</h2>
@@ -286,8 +331,8 @@ const SwotTable = () => {
         <div className="mt-2 text-gray-700 font-medium">
           <b>Итоговая оценка:</b> Проект имеет высокий потенциал успеха (общий балл: <span className="text-teal-700 font-bold">3.8/5</span>), но требует тщательного управления рисками и поэтапной реализации.
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 };
 

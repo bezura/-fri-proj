@@ -195,38 +195,59 @@ const iconByStage = [
   <Calendar className="h-7 w-7 text-purple-600" />       // 5
 ];
 
+const divider = (
+  <motion.div
+    initial={{ width: 0 }}
+    animate={{ width: "100%" }}
+    transition={{ duration: 0.8, delay: 0.2 }}
+    className="h-1 bg-gradient-to-r from-teal-500 to-orange-500 rounded-full my-8"
+  />
+);
+
+const blockAnim = {
+  initial: { opacity: 0, y: 40 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.7 },
+};
+
+const accentList = "bg-teal-50 border-l-4 border-teal-300 p-4 rounded-lg mb-2";
+const accentListOrange = "bg-orange-50 border-l-4 border-orange-300 p-4 rounded-lg mb-2";
+const accentListBlue = "bg-blue-50 border-l-4 border-blue-300 p-4 rounded-lg mb-2";
+const accentListGreen = "bg-green-50 border-l-4 border-green-300 p-4 rounded-lg mb-2";
+// const accentListPurple = "bg-purple-50 border-l-4 border-purple-300 p-4 rounded-lg mb-2";
+
 const Timeline = () => {
   return (
-    <section className="mb-20 px-4 max-w-4xl mx-auto">
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className="mb-20 px-4 max-w-4xl mx-auto"
+    >
       <div className="relative mb-12">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={{ width: "100%" }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-teal-500 to-orange-500"
-        />
         <div className="flex items-center gap-3 mb-2">
-          <div className="bg-teal-100 p-2 rounded-lg">
-            <ClipboardList className="h-6 w-6 text-teal-700" />
+          <div className="bg-teal-100 p-2 rounded-lg shadow">
+            <ClipboardList className="h-7 w-7 text-teal-700" />
           </div>
           <motion.h1
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="font-sans text-3xl font-bold text-teal-700"
+            className="font-sans text-3xl md:text-4xl font-bold text-teal-800 drop-shadow-sm"
           >
             Этапы реализации проекта
           </motion.h1>
         </div>
+        {divider}
       </div>
-      <div className="space-y-16">
+      <div className="space-y-20">
         {stages.map((stage, idx) => (
           <motion.div
             key={stage.number}
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 + idx * 0.1 }}
-            className="relative bg-white rounded-xl shadow-sm border border-gray-100 p-8"
+            {...blockAnim}
+            transition={{ ...blockAnim.transition, delay: 0.2 + idx * 0.1 }}
+            className="relative bg-white/90 rounded-2xl shadow-lg border border-gray-100 p-8 overflow-hidden"
           >
             <div className="flex items-center gap-4 mb-4">
               <div className="bg-teal-50 p-3 rounded-lg shadow">
@@ -242,25 +263,25 @@ const Timeline = () => {
             <div className="mb-4">
               <h3 className="font-semibold text-teal-700 mb-2">Основные задачи:</h3>
               {Array.isArray(stage.tasks)
-                ? <ul className="list-disc pl-6 space-y-1 text-gray-700">{stage.tasks.map((t, i) => <li key={i}>{t}</li>)}</ul>
-                : <div className="text-gray-700">{stage.tasks}</div>}
+                ? <div className={accentList}><ul className="list-disc pl-6 space-y-1 text-gray-800">{stage.tasks.map((t, i) => <li key={i}>{t}</li>)}</ul></div>
+                : <div className={accentList}>{stage.tasks}</div>}
             </div>
             {stage.resources && (
               <div className="mb-4">
                 <h3 className="font-semibold text-teal-700 mb-2">Ресурсы и ответственные:</h3>
-                <ul className="list-disc pl-6 space-y-1 text-gray-700">{stage.resources.map((r, i) => <li key={i}>{r}</li>)}</ul>
+                <div className={accentListBlue}><ul className="list-disc pl-6 space-y-1 text-gray-800">{stage.resources.map((r, i) => <li key={i}>{r}</li>)}</ul></div>
               </div>
             )}
             {stage.criteria && (
               <div className="mb-4">
-                <h3 className="font-semibold text-teal-700 mb-2">Критерии завершения:</h3>
-                <ul className="list-disc pl-6 space-y-1 text-gray-700">{stage.criteria.map((c, i) => <li key={i}>{c}</li>)}</ul>
+                <h3 className="font-semibold text-green-700 mb-2">Критерии завершения:</h3>
+                <div className={accentListGreen}><ul className="list-disc pl-6 space-y-1 text-gray-800">{stage.criteria.map((c, i) => <li key={i}>{c}</li>)}</ul></div>
               </div>
             )}
             {stage.risks && (
               <div className="mb-4">
                 <h3 className="font-semibold text-orange-700 mb-2">Управление рисками:</h3>
-                <ul className="list-disc pl-6 space-y-1 text-gray-700">{stage.risks.map((r, i) => <li key={i}>{r}</li>)}</ul>
+                <div className={accentListOrange}><ul className="list-disc pl-6 space-y-1 text-gray-800">{stage.risks.map((r, i) => <li key={i}>{r}</li>)}</ul></div>
               </div>
             )}
             {/* Красивый разделитель между этапами */}
@@ -270,7 +291,7 @@ const Timeline = () => {
           </motion.div>
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 };
 

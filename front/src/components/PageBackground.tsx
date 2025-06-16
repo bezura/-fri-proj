@@ -50,6 +50,7 @@ export function PageBackground({ pageId }: { pageId: string }) {
         />
       )}
       <button
+        className="change-bg-btn"
         style={{
           position: "fixed",
           bottom: 24,

@@ -65,7 +65,7 @@ const Header = () => {
               <Users size={32} />
             </div>
             <h1 className="font-sans text-3xl md:text-4xl font-bold text-gray-800">
-            HCM-система для агрокомплекса
+            HCM-система для агрокомплекса (SUpperHCM)
             </h1>
           </div>
           <p className="text-lg text-gray-700 max-w-2xl">

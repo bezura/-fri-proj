@@ -332,11 +332,11 @@ export default function ProjectVisualizationSection() {
       transition={{ duration: 0.7 }}
       className="mb-16"
     >
-      <h2 className="text-2xl md:text-3xl font-bold text-teal-800 mb-2">7. Визуализация данных проекта</h2>
+      <h2 className="text-2xl md:text-3xl font-bold text-teal-800 mb-2">Визуализация данных проекта</h2>
       {divider}
 
       {/* 7.1 Бюджет и ресурсы */}
-      <h3 className="text-xl font-semibold text-teal-700 mb-2">7.1) Бюджет и ресурсы</h3>
+      <h3 className="text-xl font-semibold text-teal-700 mb-2">Бюджет и ресурсы</h3>
       <div className="grid md:grid-cols-2 gap-8 mb-8">
         <div className="bg-white rounded-xl shadow border border-teal-100 p-4">
           <div className="font-bold text-gray-800 mb-2">Распределение бюджета проекта</div>
@@ -351,7 +351,7 @@ export default function ProjectVisualizationSection() {
       </div>
 
       {/* 7.2 Временные характеристики */}
-      <h3 className="text-xl font-semibold text-teal-700 mb-2">7.2) Временные характеристики</h3>
+      <h3 className="text-xl font-semibold text-teal-700 mb-2">Временные характеристики</h3>
       <div className="mb-8 grid md:grid-cols-2 gap-8">
         <div className="bg-white rounded-xl shadow border border-teal-100 p-4">
           <div className="font-bold text-gray-800 mb-2">Диаграмма Гантта проекта</div>
@@ -368,7 +368,7 @@ export default function ProjectVisualizationSection() {
       </div>
 
       {/* 7.3 Функциональность системы */}
-      <h3 className="text-xl font-semibold text-teal-700 mb-2">7.3) Функциональность системы</h3>
+      <h3 className="text-xl font-semibold text-teal-700 mb-2">Функциональность системы</h3>
       <div className="mb-8 grid md:grid-cols-2 gap-8">
         <div className="bg-white rounded-xl shadow border border-teal-100 p-4">
           <div className="font-bold text-gray-800 mb-2">Диаграмма приоритетности функций</div>
@@ -385,7 +385,7 @@ export default function ProjectVisualizationSection() {
       </div>
 
       {/* 7.4 Аналитика эффективности */}
-      <h3 className="text-xl font-semibold text-teal-700 mb-2">7.4) Аналитика эффективности</h3>
+      <h3 className="text-xl font-semibold text-teal-700 mb-2">Аналитика эффективности</h3>
       <div className="mb-8 grid md:grid-cols-2 gap-8">
         <div className="bg-white rounded-xl shadow border border-teal-100 p-4">
           <div className="font-bold text-gray-800 mb-2">График ROI по годам</div>
@@ -425,7 +425,7 @@ export default function ProjectVisualizationSection() {
       </div>
 
       {/* 7.5 Пользовательская аналитика */}
-      <h3 className="text-xl font-semibold text-teal-700 mb-2">7.5) Пользовательская аналитика</h3>
+      <h3 className="text-xl font-semibold text-teal-700 mb-2">Пользовательская аналитика</h3>
       <div className="mb-8 grid md:grid-cols-2 gap-8">
         <div className="bg-white rounded-xl shadow border border-teal-100 p-4">
           <div className="font-bold text-gray-800 mb-2">Распределение пользователей по ролям</div>
