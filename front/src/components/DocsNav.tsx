@@ -24,13 +24,13 @@ export default function DocsNav() {
   }, [navigate]);
 
   return (
-    <nav className="sticky top-4 z-10 mb-8 flex gap-2 flex-wrap justify-center md:justify-start items-center">
+    <nav className="sticky top-4 z-10 mb-8 flex gap-2 flex-wrap justify-center md:justify-start items-center bg-white/70 backdrop-blur-sm rounded-sm shadow border border-teal-50">
       <div className="flex gap-2 flex-wrap">
         {sections.map((section) => (
           <Link
             key={section.id}
             to={`/docs/${section.id}`}
-            className={`px-3 py-1 rounded text-teal-700 hover:bg-teal-100 transition-colors text-sm font-medium border border-teal-100 ${location.pathname === `/docs/${section.id}` ? 'bg-teal-100' : ''}`}
+            className={`px-1 py-1 rounded md:px-3 text-teal-700 hover:bg-teal-100 transition-colors text-sm font-medium border border-teal-100 ${location.pathname === `/docs/${section.id}` ? 'bg-teal-100' : ''}`}
           >
             {section.label}
           </Link>

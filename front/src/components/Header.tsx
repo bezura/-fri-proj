@@ -49,28 +49,29 @@ const developers = [
 
 const Header = () => {
   return (
-    <header className="relative py-12 px-4 mb-12 overflow-hidden bg-gradient-to-r from-white to-teal-50 bg-white/80 backdrop-blur rounded-xl shadow p-6">
-      <div className="absolute top-0 right-0 w-64 h-64 bg-teal-100 rounded-full opacity-20 -translate-y-1/2 translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-40 h-40 bg-teal-200 rounded-full opacity-20 translate-y-1/2 -translate-x-1/2" />
-      <div className="max-w-4xl mx-auto relative">
+    <header className="relative py-12 px-4 mb-12 overflow-hidden">
+      <div className="max-w-4xl mx-auto relative bg-white/80 rounded-xl shadow p-6">
         {/* Обзор проекта */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-8"
+          className="mb-8 relative overflow-hidden bg-white/80 rounded-xl shadow p-4 border border-teal-50 "
         >
-          <div className="flex items-center gap-3 mb-2">
+          <div className="flex items-center gap-3 mb-2 ">
             <div className="bg-teal-700 p-3 rounded-lg text-white shadow-lg">
               <Users size={32} />
             </div>
-            <h1 className="font-sans text-3xl md:text-4xl font-bold text-gray-800">
-            HCM-система для агрокомплекса (SUpperHCM)
+            <h1 className="font-sans text-3xl md:text-4xl font-bold text-gray-800 mb-5">
+            HCM-система для агрокомплекса
             </h1>
           </div>
           <p className="text-lg text-gray-700 max-w-2xl">
           Проект представляет из себя систему управления внутренними ресурсами персонала (HCM) предназначенную для агрокомплексов, чтобы оптимизировать HR-процессы, автоматизировать учет сотрудников и внедрить передовые технологии. Используя машинное обучение для анализа данных и прогнозирования урожая, а также IoT-устройства для мониторинга полей, мы повышаем эффективность и прозрачность управления.
           </p>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-teal-100 rounded-full opacity-20 -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+      {/* <div className="absolute bottom-0 left-0 w-40 h-40 bg-teal-200 rounded-full opacity-20 translate-y-1/2 -translate-x-1/2 pointer-events-none" /> */}
+      {/* <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-teal-500 via-teal-700 to-teal-500 pointer-events-none"></div> */}
         </motion.div>
 
         {/* Основные функции */}
@@ -99,7 +100,7 @@ const Header = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mb-10"
+          className="mb-10 bg-white/80 rounded-xl shadow p-4 border border-teal-50"
         >
           <h2 className="font-sans text-2xl font-semibold text-teal-700 mb-4">Преимущества нашей системы</h2>
           <ul className="list-disc pl-6 space-y-2 text-gray-700">
@@ -135,7 +136,6 @@ const Header = () => {
         </motion.div>
 
       </div>
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-teal-500 via-teal-700 to-teal-500"></div>
     </header>
   );
 };
